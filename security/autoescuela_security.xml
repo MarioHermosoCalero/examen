@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--definimos una categoría de seguridad para el módulo-->
+    <!--convenio: id="modulo.module_category_modulo"-->
+    <record model="ir.module.category" id="examen.module_category_autoescuela">
+        <field name="name">Autoescuela</field>
+        <field name="description">Ayudar a gestionar tu autoescuela</field>
+        <!--aunque nuestro módulo 'Autoescuela' es independiente y no vamos a extenderlo,
+        vamos a definir igualmente la secuencia aunque no sea necesario para este caso, 
+        ya que esta secuencia indica una prioridad a la hora de mostrar la información,
+        incluso podemos pedir datos específicos de un determinado número de secuencia.
+        Le damos un valor alto, aleatorio-->
+        <field name="sequence">100</field>
+    </record>
+
+    <!--definimos el grupo de seguridad para el módulo del perfil 'Gestor' y lo vinculo
+    a la categoría definida más arriba-->
+    <record model="res.groups" id="group_examen_gestor">
+        <field name="name">Gestor</field>
+        <!--asocio el grupo a la categoría definida arriba-->
+        <field name="category_id" ref="examen.module_category_autoescuela"/>
+        <field name="comment">Usuarios que gestionan profesores, alumnos y exámenes</field>
+        <!--en este ejemplo no se hará, pero si quisiéramos añadir a todos 
+        los usuarios a un grupo-->
+        <!-- <field name="implied_ids" eval="[(4,ref('base.group_user'))]"/> -->
+    </record>
+
+    <!--definimos el grupo de seguridad para el módulo del perfil 'Director' y lo vinculo
+    a la categoría definida más arriba-->
+    <record model="res.groups" id="group_examen_director">
+        <field name="name">Director</field>
+        <!--asocio el grupo a la categoría definida arriba-->
+        <field name="category_id" ref="examen.module_category_autoescuela"/>
+        <field name="comment">Usuarios que gestionan las autoescuelas</field>
+        <!--los miembros del grupo 'director', también son miembros del grupo 'usuario'.
+        Con el atributo 'eval' le indicamos al ORM que añada (4) al grupo 'director'
+        todos los registros que tengan el id obtenido de 'ref('group_examen_gestor')'.
+        El contenido del atributo 'eval' viene explicado en la documentación oficial de Odoo 14: 
+        https://www.odoo.com/documentation/14.0/developer/reference/addons/orm.html#common-orm-methods-->
+        <field name="implied_ids" eval="[(4,ref('group_examen_gestor'))]" />
+        <!--añado a los usuarios administradores de Odoo-->
+        <field name="users" eval="[(4,ref('base.user_root')),(4, ref('base.user_admin'))]"/>
+    </record>
+</odoo>

@@ -1,0 +1,84 @@
+<odoo>
+    <!-- DEFINICIÓN DEL INFORME-->
+    <!--convenio id="modulo.clase_report"-->
+    <record id="examen.profesor_report" model="ir.actions.report">
+        <field name="name">Informe de profesor</field>
+        <field name="model">examen.profesor</field>
+        <!--tenemos dos tipos de informes: html o pdf. Le indico pdf-->
+        <field name="report_type">qweb-pdf</field>
+        <!--tenemos dos tipos de informes: html o pdf. Le indico html-->
+        <!-- <field name="report_type">qweb-html</field> -->
+        <!--informe tipo vista-->
+        <field name="report_name">examen.profesor_report_view</field>
+        <field name="report_file">examen.profesor_report</field>
+        <field name="binding_model_id" ref="model_examen_profesor"/>
+        <field name="binding_type">report</field>                
+    </record>
+
+    <!-- DEFINICIÓN DE LA PLANTILLA DEL INFORME-->
+    <!--el id del template es el valor del field name="report_name", sin poner el
+    nombre del módulo-->
+    <template id="profesor_report_view">
+        <!--t-foreach se recorre todos los alumnos. A la variable iteradora
+        la llamaremos 'alumno' para hacerlo más legible-->
+        <t t-foreach="docs" t-as="profesor">
+            <!--contenedor html para darle formato-->
+            <t t-call="web.html_container"> 
+                <!--cargará la cabecera con los datos de la empresa-->
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>
+                            <span t-field="profesor.name"/>
+                        </h2>
+                        <p>DNI: <span t-field="profesor.dni"/></p>
+                        <p>Coche: <span t-field="profesor.coche"/></p>
+                        <p>Matrícula: <span t-field="profesor.matricula"/></p>
+                        <p>Autoescuela: <span t-field="profesor.autoescuela_id"/></p>
+                        <p>Incorporación: <span t-field="profesor.incorporacion"/></p>
+                        <p>Antigüedad: <span t-field="profesor.antiguedad"/></p>
+                        <!--alumno_ids-->
+                        <hr size="8px"/>                        
+                        <h6>
+                            <span style="font-weight:bold">Alumnos matriculados</span>
+                        </h6>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>DNI</th>
+                                    <th>Autoescuela</th>
+                                    <th>Profesor</th>
+                                    <th>Domicilio</th>
+                                    <th>Matricula</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="profesor.alumno_ids" t-as="alumno">
+                                    <td>
+                                        <span t-field="alumno.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="alumno.dni"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="alumno.autoescuela_id"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="alumno.profesor_id"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="alumno.domicilio"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="alumno.matricula"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>      
+

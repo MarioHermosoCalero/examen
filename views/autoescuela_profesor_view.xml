@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<odoo> 
+	<record id="examen.profesor_form_view" model="ir.ui.view">
+        <field name="name">examen.profesor.view.form</field>
+        <field name="model">examen.profesor</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Profesor">
+				<group>
+                    <group>
+                        <separator string="Información general"/>
+                   
+                    </group>
+                    <group>
+                     
+                    </group>
+                </group>
+               
+            </form>
+        </field>
+    </record>
+	
+	<record id="examen.profesor_list_view" model="ir.ui.view">
+        <field name="name">examen.profesor.view.tree</field>
+        <field name="model">examen.profesor</field>
+        <field name="arch" type="xml">
+			<tree>
+                   
+            </tree>
+            
+        </field>
+    </record>
+			
+    <record model="ir.actions.act_window" id="examen.profesor_action_window">
+        <field name="name">Profesores</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">examen.profesor</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo> 
+

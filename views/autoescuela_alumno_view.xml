@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<odoo> 
+	<record id="examen.alumno_form_view" model="ir.ui.view">
+        <field name="name">examen.alumno.view.form</field>
+        <field name="model">examen.alumno</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Alumnos">
+                <group>
+                    <group>
+                        <separator string="Información general"/>
+                        
+                    </group>
+                    <group>
+                      
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+	
+	<record id="examen.alumno_list_view" model="ir.ui.view">
+        <field name="name">examen.alumno.view.tree</field>
+        <field name="model">examen.alumno</field>
+        <field name="arch" type="xml">
+			<tree>
+                   
+            </tree>
+            
+        </field>
+    </record>
+			
+    <record model="ir.actions.act_window" id="examen.alumno_action_window">
+        <field name="name">Alumnos</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">examen.alumno</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo> 
+

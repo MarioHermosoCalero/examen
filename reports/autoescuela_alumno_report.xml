@@ -1,0 +1,93 @@
+<odoo>
+    <!-- DEFINICIÓN DEL INFORME-->
+    <!--convenio id="modulo.clase_report"-->
+    <record id="examen.alumno_report" model="ir.actions.report">
+        <field name="name">Informe de alumno</field>
+        <field name="model">examen.alumno</field>
+        <!--tenemos dos tipos de informes: html o pdf. Le indico pdf-->
+        <field name="report_type">qweb-pdf</field>
+        <!--tenemos dos tipos de informes: html o pdf. Le indico html-->
+        <!-- <field name="report_type">qweb-html</field> -->
+        <!--informe tipo vista-->
+        <field name="report_name">examen.alumno_report_view</field>
+        <field name="report_file">examen.alumno_report</field>
+        <field name="binding_model_id" ref="model_examen_alumno"/>
+        <field name="binding_type">report</field>                
+    </record>
+
+    <!-- DEFINICIÓN DE LA PLANTILLA DEL INFORME-->
+    <!--el id del template es el valor del field name="report_name", sin poner el
+    nombre del módulo-->
+    <template id="alumno_report_view">
+        <!--t-foreach se recorre todos los alumnos. A la variable iteradora
+        la llamaremos 'alumno' para hacerlo más legible-->
+        <t t-foreach="docs" t-as="alumno">
+            <!--contenedor html para darle formato-->
+            <t t-call="web.html_container"> 
+                <!--cargará la cabecera con los datos de la empresa-->
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>
+                            <span t-field="alumno.name"/>
+                        </h2>
+                        <p>DNI: <span t-field="alumno.dni"/></p>
+                        <p>Domicilio: <span t-field="alumno.domicilio"/></p>
+                        <p>Matrícula: <span t-field="alumno.matricula"/></p>
+                        <p>Autoescuela: <span t-field="alumno.autoescuela_id"/></p>
+                        <p>Profesor: <span t-field="alumno.profesor_id"/></p>
+                        <!--examen_ids-->
+                        <hr size="8px"/>
+                        <h6>
+                            <span style="font-weight:bold">Exámenes</span>
+                        </h6>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Fecha</th>
+                                    <th>Precio</th>
+                                    <th>Moneda</th>
+                                    <th>Clases</th>
+                                    <th>Carnet</th>
+                                    <th>Aprobado</th>                         
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="alumno.examen_ids" t-as="examen">
+                                    <td>
+                                        <span t-field="examen.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="examen.fecha"/>
+                                    </td>
+                                    <td>                                        
+                                        <span t-field="examen.precio"
+                                                  t-options="{'widget': 'monetary','display_currency': examen.moneda_id}"/>                                      
+                                    </td>
+                                    <td>
+                                        <span t-field="examen.moneda_id"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="examen.clases"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="examen.carnet"/>
+                                    </td>
+                                    <!--Como no queremos que este valor se muestre como True
+                                    cuando esté aprobado, sino que queremos algo más legible
+                                    para el usuario, usamos una estructura condicional-->
+                                    <td>
+                                        <t t-if="examen.aprobado">
+                                            <span>Si</span>
+                                        </t>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>      
+

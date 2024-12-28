@@ -1,0 +1,86 @@
+<odoo>
+    <!-- DEFINICIÓN DEL INFORME-->
+    <!--convenio id="modulo.clase_report"-->
+    <record id="examen.examen_report" model="ir.actions.report">
+        <field name="name">Informe de los exámenes por alumno</field>
+        <field name="model">examen.examen</field>
+        <!--tenemos dos tipos de informes: html o pdf. Le indico pdf-->
+        <field name="report_type">qweb-pdf</field>
+        <!--tenemos dos tipos de informes: html o pdf. Le indico html-->
+        <!-- <field name="report_type">qweb-html</field> -->
+        <!--informe tipo vista-->
+        <field name="report_name">examen.examen_report_view</field>
+        <field name="report_file">examen.examen_report</field>
+        <field name="binding_model_id" ref="model_examen_examen"/>
+        <field name="binding_type">report</field>                
+    </record>
+    
+    <!-- DEFINICIÓN DE LA PLANTILLA DEL INFORME-->
+    <!--el id del template es el valor del field name="report_name", sin poner el
+    nombre del módulo-->
+    <template id="examen_report_view">
+        <!--t-foreach se recorre todos los alumnos. A la variable iteradora
+        la llamaremos 'alumno' para hacerlo más legible-->
+        <t t-foreach="docs" t-as="examen">
+            <!--contenedor html para darle formato-->
+            <t t-call="web.html_container"> 
+                <!--cargará la cabecera con los datos de la empresa-->
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>
+                            <span t-field="examen.name"/>
+                        </h2>
+                        <p>Fecha: <span t-field="examen.fecha"/></p>
+                        <p>Precio: <span t-field="examen.precio"/></p>
+                        <p>Moneda: <span t-field="examen.moneda_id"/></p>
+                        <p>Clases: <span t-field="examen.clases"/></p>
+                        <!--Como no queremos que este valor se muestre como True
+                        cuando esté averiado, sino que queremos algo más legible
+                        para el usuario, usamos una estructura condicional-->
+                        <p>Aprobado: <t t-if="examen.aprobado">
+                                            <span>Si</span>
+                                     </t></p>   
+                        <!-- <p>Aprobado: <span t-field="examen.aprobado"/></p> -->
+                        <p>Alumno: <span t-field="examen.alumno_id"/></p>
+                        <!--autoescuela_ids-->
+                        <hr size="8px"/>                        
+                        <h6>
+                            <span style="font-weight:bold">Autoescuelas</span>
+                        </h6>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Domicilio</th>
+                                    <th>Localidad</th>
+                                    <th>Provincia</th>
+                                    <th>Contacto</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="examen.autoescuela_ids" t-as="autoescuela">
+                                    <td>
+                                        <span t-field="examen.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="examen.domicilio"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="examen.localidad"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="examen.provincia"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="examen.contacto"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>      
+

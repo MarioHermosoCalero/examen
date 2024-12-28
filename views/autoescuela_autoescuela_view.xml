@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<odoo> 
+	<record id="examen.autoescuela_form_view" model="ir.ui.view">
+        <field name="name">examen.examen.view.form</field>
+        <field name="model">examen.autoescuela</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Formulario de autoescuela">
+				<group>
+                    <group>
+                        <separator string="Información general"/>
+                       
+                    </group>
+                    <group>
+                       
+                    </group>
+                    <group>
+                    
+                    </group>
+                    <group>
+                        
+                    </group>
+                </group>               
+            </form>
+        </field>
+    </record>
+	
+	<record id="examen.autoescuela_list_view" model="ir.ui.view">
+        <field name="name">examen.examen.view.tree</field>
+        <field name="model">examen.autoescuela</field>
+        <field name="arch" type="xml">
+			<tree>
+
+            </tree>
+            
+        </field>
+    </record>
+			
+    <record model="ir.actions.act_window" id="examen.autoescuela_action_window">
+        <field name="name">Autoescuelas</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">examen.autoescuela</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo> 
+

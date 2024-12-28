@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<odoo> 
+	<!--  Declaramos los menús --> 
+
+	<!-- menú raíz -->
+	<menuitem id="examen.menu_root" name="Autoescuela Examen DAM" 
+		web_icon="examen,static/description/icon.png"/>
+	
+	<!-- categorías del menú raíz -->
+
+	<menuitem name="Autoescuelas" id="examen.autoescuela_menu"/>
+
+	<menuitem name="Profesores" id="examen.profesor_menu"/>
+
+	<menuitem name="Alumnos" id="examen.alumno_menu"/>
+
+	<menuitem name="Exámenes por Alumno" id="examen.examen_menu"/>
+
+</odoo> 

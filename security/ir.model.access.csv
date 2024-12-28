@@ -1,0 +1,6 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_examen_alumno_gestor, examen.alumno.gestor,model_examen_alumno,examen.group_examen_gestor,1,1,1,1
+access_examen_profesor_gestor, examen.profesor.gestor,model_examen_profesor,examen.group_examen_gestor,1,1,1,1
+access_examen_examen_gestor, examen.examen.gestor,model_examen_examen,examen.group_examen_gestor,1,1,1,1
+access_examen_autoescuela_gestor, examen.examen.gestor,model_examen_autoescuela,examen.group_examen_gestor,1,0,0,0
+access_examen_autoescuela_director, examen.examen.director,model_examen_autoescuela,examen.group_examen_director,1,1,1,1
