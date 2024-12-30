@@ -28,12 +28,12 @@
                 <t t-call="web.external_layout">
                     <div class="page">
                         <h2>
-                            <span t-field="examen.name"/>
+                            <span t-field="autoescuela.name"/>
                         </h2>
-                        <p>Domicilio: <span t-field="examen.domicilio"/></p>
-                        <p>Localidad: <span t-field="examen.localidad"/></p>
-                        <p>Provincia: <span t-field="examen.provincia"/></p>
-                        <p>Contacto: <span t-field="examen.contacto"/></p>            
+                        <p>Domicilio: <span t-field="autoescuela.domicilio"/></p>
+                        <p>Localidad: <span t-field="autoescuela.localidad"/></p>
+                        <p>Provincia: <span t-field="autoescuela.provincia"/></p>
+                        <p>Contacto: <span t-field="autoescuela.contacto"/></p>            
                         <!--examen_ids-->
                         <hr size="8px"/>
                         <h6>
@@ -52,7 +52,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr t-foreach="examen.examen_ids" t-as="examen">
+                                <tr t-foreach="autoescuela.examen_ids" t-as="examen">
                                     <td>
                                         <span t-field="examen.name"/>
                                     </td>
@@ -60,12 +60,8 @@
                                         <span t-field="examen.fecha"/>
                                     </td>
                                     <td>                                        
-                                        <span t-field="examen.precio"
-                                                  t-options="{'widget': 'monetary','display_currency': examen.moneda_id}"/>                                      
-                                    </td>
-                                    <td>
-                                        <span t-field="examen.moneda_id"/>
-                                    </td>
+                                        <span t-field="examen.precio"/>                                      
+                                    </td>                                    
                                     <td>
                                         <span t-field="examen.clases"/>
                                     </td>
@@ -101,7 +97,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr t-foreach="examen.profesor_ids" t-as="profesor">
+                                <tr t-foreach="autoescuela.profesor_ids" t-as="profesor">
                                     <td>
                                         <span t-field="profesor.name"/>
                                     </td>
@@ -143,7 +139,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr t-foreach="examen.alumno_ids" t-as="alumno">
+                                <tr t-foreach="autoescuela.alumno_ids" t-as="alumno">
                                     <td>
                                         <span t-field="alumno.name"/>
                                     </td>
