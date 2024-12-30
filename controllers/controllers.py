@@ -9,14 +9,14 @@
 
 #     @http.route('/autoescuela/autoescuela/objects', auth='public')
 #     def list(self, **kw):
-#         return http.request.render('autoescuela.listing', {
+#         return http.request.render('examen.listing', {
 #             'root': '/autoescuela/autoescuela',
-#             'objects': http.request.env['autoescuela.autoescuela'].search([]),
+#             'objects': http.request.env['examen.autoescuela'].search([]),
 #         })
 
-#     @http.route('/autoescuela/autoescuela/objects/<model("autoescuela.autoescuela"):obj>', auth='public')
+#     @http.route('/autoescuela/autoescuela/objects/<model("examen.autoescuela"):obj>', auth='public')
 #     def object(self, obj, **kw):
-#         return http.request.render('autoescuela.object', {
+#         return http.request.render('examen.object', {
 #             'object': obj
 #         })
 
